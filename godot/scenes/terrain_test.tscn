@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3diifdymn21o"]
+
+[ext_resource type="PackedScene" uid="uid://djmj3o77fqdk5" path="res://gen_data/TerrainTest.glb" id="1_o1sr8"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="TerrainTest" parent="." instance=ExtResource("1_o1sr8")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.465705, 0.46793, 0.751106, 0.849893, 3.715e-08, 0.526956, 0.246578, 0.883766, -0.39769, -38.2698, 41.366, -96.4641)
+light_color = Color(1, 0.815686, 0.270588, 1)
+shadow_enabled = true
+directional_shadow_blend_splits = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 88.8994, 0, -106.603)
