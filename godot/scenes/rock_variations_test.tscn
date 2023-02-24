@@ -1,0 +1,84 @@
+[gd_scene load_steps=13 format=3 uid="uid://5o5iuot1qwdv"]
+
+[ext_resource type="ArrayMesh" uid="uid://dfgyapvbbyxxp" path="res://gen_data/Common/Rock/Rock1.obj" id="1_6fd2l"]
+[ext_resource type="ArrayMesh" uid="uid://fpiabrh3ik1s" path="res://gen_data/Common/Rock/Rock2.obj" id="2_pprdi"]
+[ext_resource type="ArrayMesh" uid="uid://u4w5ln7er83o" path="res://gen_data/Common/Rock/Rock3.obj" id="3_cnrqd"]
+[ext_resource type="ArrayMesh" uid="uid://bhuchm740p7c5" path="res://gen_data/Common/Rock/Rock4.obj" id="4_x8mfn"]
+[ext_resource type="ArrayMesh" uid="uid://b6bl0spvip663" path="res://gen_data/Common/Rock/Rock5.obj" id="5_f0dmx"]
+[ext_resource type="ArrayMesh" uid="uid://cilsh7gx3hh8h" path="res://gen_data/Common/Rock/Rock6.obj" id="6_1jd46"]
+[ext_resource type="ArrayMesh" uid="uid://cfebonwxc3vlr" path="res://gen_data/Common/Rock/Rock7.obj" id="7_5qurt"]
+[ext_resource type="ArrayMesh" uid="uid://dpwu8trx1pfg0" path="res://gen_data/Common/Rock/Rock8.obj" id="8_up4cv"]
+[ext_resource type="ArrayMesh" uid="uid://ojyxulyj5bau" path="res://gen_data/Common/Rock/Rock9.obj" id="9_miwfg"]
+[ext_resource type="ArrayMesh" uid="uid://8avxop2ltxvf" path="res://gen_data/Common/Rock/Rock10.obj" id="10_g3dgp"]
+[ext_resource type="PackedScene" uid="uid://b1seayv33cx86" path="res://gen_data/Common/Rock_GLTF/Rock_GLTF1.gltf" id="11_c28xj"]
+[ext_resource type="PackedScene" uid="uid://c83fu8ba16pgk" path="res://gen_data/Common/Rock_GLTF/Rock_GLTF2.gltf" id="12_27xtx"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(15, 0, 0, 0, 0.1, 0, 0, 0, 15, 5, 0, 5)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.29763, -0.930418, -0.213869, 0.583541, -2.55074e-08, 0.812084, -0.755577, -0.366501, 0.542937, -382.698, 4.1366, -964.641)
+light_color = Color(0.937255, 0.556863, 0.219608, 1)
+shadow_enabled = true
+directional_shadow_blend_splits = true
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Rock1" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = ExtResource("1_6fd2l")
+skeleton = NodePath("../..")
+
+[node name="Rock2" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 2.5, 0, 0)
+mesh = ExtResource("2_pprdi")
+skeleton = NodePath("../..")
+
+[node name="Rock3" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 5, 0, 0)
+mesh = ExtResource("3_cnrqd")
+skeleton = NodePath("../..")
+
+[node name="Rock4" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 7.5, 0, 0)
+mesh = ExtResource("4_x8mfn")
+skeleton = NodePath("../..")
+
+[node name="Rock5" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 10, 0, 0)
+mesh = ExtResource("5_f0dmx")
+skeleton = NodePath("../..")
+
+[node name="Rock6" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 2.5)
+mesh = ExtResource("6_1jd46")
+skeleton = NodePath("../..")
+
+[node name="Rock7" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 2.5, 0, 2.5)
+mesh = ExtResource("7_5qurt")
+skeleton = NodePath("../..")
+
+[node name="Rock8" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 5, 0, 2.5)
+mesh = ExtResource("8_up4cv")
+skeleton = NodePath("../..")
+
+[node name="Rock9" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 7.5, 0, 2.5)
+mesh = ExtResource("9_miwfg")
+skeleton = NodePath("../..")
+
+[node name="Rock10" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 10, 0, 2.5)
+mesh = ExtResource("10_g3dgp")
+skeleton = NodePath("../..")
+
+[node name="Rock_GLTF1" parent="." instance=ExtResource("11_c28xj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.323267, 1.31516, 4.94008)
+
+[node name="Rock_GLTF2" parent="." instance=ExtResource("12_27xtx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.35356, 1.36004, 4.89732)
