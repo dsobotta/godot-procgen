@@ -11,15 +11,20 @@
 # pylint: disable=C0116
 
 from . import utils
-from . import gen_variants
+from .build_step import batch_build_in_dir
+from .gen_variants import GenVariants
+from .export_models import ExportModels
 
 def clean() -> bool:
     utils.clean_build_dir()
     return True
 
 def build() -> bool:
-    if not gen_variants.run():
+    if not batch_build_in_dir(GenVariants, utils.get_source_dir(), "*.blend"):
         return False
+
+    #if not batch_build_in_dir(ExportModels, utils.get_models_dir(), "*.blend"):
+    #    return False
 
     return True
 

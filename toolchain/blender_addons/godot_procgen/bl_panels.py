@@ -24,13 +24,14 @@ class GDPG_PT_MainPanel(bpy.types.Panel):
         layout = self.layout
         col = layout.column()
 
-        col.label(text="Build")
+        col.label(text="All Files")
         col.operator("gdpg.clean")
         col.operator("gdpg.build")
         col.operator("gdpg.rebuild")
 
-        col.label(text="Partial Steps")
+        col.label(text="Current File")
         col.operator("gdpg.gen_variants")
+        col.operator("gdpg.export_models")
 
 def register():
     bpy.utils.register_class(GDPG_PT_MainPanel)

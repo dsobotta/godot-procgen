@@ -10,6 +10,9 @@
 # Missing function or method docstring
 # pylint: disable=C0116
 
+# Line too long
+# pylint: disable=C0301
+
 # Too few public methods OMEGALUL
 # pylint: disable=R0903
 
@@ -18,7 +21,7 @@ import bpy
 from . import utils
 from . import build_step
 
-class GenVariants(build_step.BuildStep):
+class ExportModels(build_step.BuildStep):
 
     __base_name = ""
 
@@ -28,9 +31,8 @@ class GenVariants(build_step.BuildStep):
         utils.bl_save_as_file(utils.create_tmp_blend())
 
     def run(self) -> bool:
-
-        variations = 5
-        out_dir = utils.get_assets_dir() + "\\models"
+        out_dir = utils.get_export_dir() + "\\models"
+        utils.create_dir(out_dir)
 
         bpy.ops.object.select_all(action='DESELECT')
 
@@ -38,12 +40,8 @@ class GenVariants(build_step.BuildStep):
         for obj in bpy.data.objects:
             obj.select_set(True)
             bpy.ops.object.mode_set(mode='OBJECT')
-
-            for i in range(variations):
-                #perform variation logic
-
-                utils.bl_save_as_file(out_dir + "\\" + self.__base_name + str(i+1) + ".blend")
-
+            bpy.ops.object.convert(target='MESH')
+            bpy.ops.export_scene.gltf(filepath=out_dir + "\\" + self.__base_name, export_format='GLB')
             obj.select_set(False)
 
         self._cleanup()

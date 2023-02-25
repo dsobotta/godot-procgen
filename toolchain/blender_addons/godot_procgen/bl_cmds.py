@@ -12,9 +12,10 @@
 
 import bpy
 from . import build_cmds
-from . import gen_variants
 from . import utils
-
+from . import build_step
+from .gen_variants import GenVariants
+from .export_models import ExportModels
 
 class Clean(bpy.types.Operator):
     bl_label = "Clean All"
@@ -37,23 +38,30 @@ class Rebuild(bpy.types.Operator):
     def execute(self, context):
         return utils.bl_result(build_cmds.rebuild())
 
-
-class GenVariants(bpy.types.Operator):
+class BlGenVariants(bpy.types.Operator):
     bl_label = "Generate Variants"
     bl_idname = "gdpg.gen_variants"
 
     def execute(self, context):
-        return utils.bl_result(gen_variants.run())
+        return utils.bl_result(build_step.build_open_file(GenVariants))
 
+class BlExportModels(bpy.types.Operator):
+    bl_label = "Export Models"
+    bl_idname = "gdpg.export_models"
+
+    def execute(self, context):
+        return utils.bl_result(build_step.build_open_file(ExportModels))
 
 def register():
     bpy.utils.register_class(Clean)
     bpy.utils.register_class(Build)
     bpy.utils.register_class(Rebuild)
-    bpy.utils.register_class(GenVariants)
+    bpy.utils.register_class(BlGenVariants)
+    bpy.utils.register_class(BlExportModels)
 
 def unregister():
     bpy.utils.unregister_class(Clean)
     bpy.utils.unregister_class(Build)
     bpy.utils.unregister_class(Rebuild)
-    bpy.utils.unregister_class(GenVariants)
+    bpy.utils.unregister_class(BlGenVariants)
+    bpy.utils.unregister_class(BlExportModels)
