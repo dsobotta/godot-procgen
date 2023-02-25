@@ -45,6 +45,7 @@ class GenVariants(bpy.types.Operator):
     def execute(self, context):
         return utils.bl_result(gen_variants.run())
 
+
 def register():
     bpy.utils.register_class(Clean)
     bpy.utils.register_class(Build)
