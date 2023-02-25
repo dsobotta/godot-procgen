@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3diifdymn21o"]
+[gd_scene load_steps=5 format=3 uid="uid://d3diifdymn21o"]
 
 [ext_resource type="PackedScene" uid="uid://djmj3o77fqdk5" path="res://gen_data/TerrainTest.glb" id="1_o1sr8"]
+[ext_resource type="PackedScene" uid="uid://bmflqcd33trt7" path="res://gen_data/Common/Rock_GLB/Rock1.glb" id="2_ap4st"]
 
 [sub_resource type="Environment" id="Environment_jh46c"]
 ssr_enabled = true
@@ -26,3 +27,6 @@ directional_shadow_blend_splits = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jh46c")
 camera_attributes = SubResource("CameraAttributesPhysical_0bb57")
+
+[node name="Rock1" parent="." instance=ExtResource("2_ap4st")]
+transform = Transform3D(-0.164234, -0.521623, 0.83722, -0.202993, -0.812706, -0.546171, 0.965309, -0.25965, 0.0275881, 20.8699, -2.26778, 11.8755)

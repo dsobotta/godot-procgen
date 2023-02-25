@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://5o5iuot1qwdv"]
+[gd_scene load_steps=18 format=3 uid="uid://5o5iuot1qwdv"]
 
 [ext_resource type="ArrayMesh" uid="uid://dfgyapvbbyxxp" path="res://gen_data/Common/Rock/Rock1.obj" id="1_6fd2l"]
 [ext_resource type="ArrayMesh" uid="uid://fpiabrh3ik1s" path="res://gen_data/Common/Rock/Rock2.obj" id="2_pprdi"]
@@ -10,8 +10,11 @@
 [ext_resource type="ArrayMesh" uid="uid://dpwu8trx1pfg0" path="res://gen_data/Common/Rock/Rock8.obj" id="8_up4cv"]
 [ext_resource type="ArrayMesh" uid="uid://ojyxulyj5bau" path="res://gen_data/Common/Rock/Rock9.obj" id="9_miwfg"]
 [ext_resource type="ArrayMesh" uid="uid://8avxop2ltxvf" path="res://gen_data/Common/Rock/Rock10.obj" id="10_g3dgp"]
-[ext_resource type="PackedScene" uid="uid://b1seayv33cx86" path="res://gen_data/Common/Rock_GLTF/Rock_GLTF1.gltf" id="11_c28xj"]
-[ext_resource type="PackedScene" uid="uid://c83fu8ba16pgk" path="res://gen_data/Common/Rock_GLTF/Rock_GLTF2.gltf" id="12_27xtx"]
+[ext_resource type="PackedScene" uid="uid://bmflqcd33trt7" path="res://gen_data/Common/Rock_GLB/Rock1.glb" id="11_dm8lg"]
+[ext_resource type="PackedScene" uid="uid://dpjdwf37qks8n" path="res://gen_data/Common/Rock_GLB/Rock2.glb" id="12_0syhp"]
+[ext_resource type="PackedScene" uid="uid://7dxo6nk08dvb" path="res://gen_data/Common/Rock_GLB/Rock3.glb" id="13_5a7do"]
+[ext_resource type="PackedScene" uid="uid://cpp28gqojdxjr" path="res://gen_data/Common/Rock_GLB/Rock4.glb" id="14_u280f"]
+[ext_resource type="PackedScene" uid="uid://coedl68ok886u" path="res://gen_data/Common/Rock_GLB/Rock5.glb" id="15_lhy1l"]
 
 [sub_resource type="Environment" id="Environment_xwj15"]
 background_color = Color(0.596078, 0.756863, 0.756863, 1)
@@ -87,11 +90,20 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 10, 0, 2.5)
 mesh = ExtResource("10_g3dgp")
 skeleton = NodePath("../..")
 
-[node name="Rock_GLTF1" parent="." instance=ExtResource("11_c28xj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
+[node name="Rock11" parent="Node3D" instance=ExtResource("11_dm8lg")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 5)
 
-[node name="Rock_GLTF2" parent="." instance=ExtResource("12_27xtx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, 5)
+[node name="Rock12" parent="Node3D" instance=ExtResource("12_0syhp")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 2.5, 0, 5)
+
+[node name="Rock13" parent="Node3D" instance=ExtResource("13_5a7do")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 5, 0, 5)
+
+[node name="Rock14" parent="Node3D" instance=ExtResource("14_u280f")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 7.5, 0, 5)
+
+[node name="Rock15" parent="Node3D" instance=ExtResource("15_lhy1l")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 10, 0, 5)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xwj15")
