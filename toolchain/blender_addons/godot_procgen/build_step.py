@@ -34,7 +34,7 @@ class BuildStep(ABC):
 def build_open_file(build_step: BuildStep) -> bool:
     orig_file = utils.bl_get_curr_file()
 
-    step_instance = build_step(orig_file)    
+    step_instance = build_step(orig_file)
     result = step_instance.run()
 
     utils.bl_open_file(orig_file)
@@ -46,7 +46,7 @@ def batch_build_in_dir(build_step: BuildStep, root_path: str, filename_wildcard:
     orig_file = utils.bl_get_curr_file()
 
     for file in pathlib.Path(root_path).glob("**/" + filename_wildcard):
-        step_instance = build_step(file)
+        step_instance = build_step(str(file))
         if not step_instance.run():
             return False
 

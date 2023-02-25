@@ -20,11 +20,16 @@ def clean() -> bool:
     return True
 
 def build() -> bool:
-    if not batch_build_in_dir(GenVariants, utils.get_source_dir(), "*.blend"):
-        return False
 
-    #if not batch_build_in_dir(ExportModels, utils.get_models_dir(), "*.blend"):
-    #    return False
+    print("GDPG: GENERATING MODEL VARIANTS...")
+    if not batch_build_in_dir(GenVariants, utils.get_source_dir() + "\\models", "*.blend"):
+        return False
+    print("GDPG: GENERATING MODEL VARIANTS...DONE")
+
+    print("GDPG: EXPORTING MODELS...")
+    if not batch_build_in_dir(ExportModels, utils.get_build_dir() + "\\assets\\models", "*.blend"):
+        return False
+    print("GDPG: EXPORTING MODELS...DONE")
 
     return True
 

@@ -33,13 +33,11 @@ def bl_get_curr_file() -> str:
 
 def bl_open_file(file: str) -> bool:
     if not os.path.exists(file):
+        print("GDPG: failed to open file: " + file)
         return False
 
-    #apparently opening a file that's already open corrupts something...
-    if bl_get_curr_file() == file:
-        return True
-
     bpy.ops.wm.open_mainfile(filepath=file)
+    print("GDPG: opened file: " + file)
     return True
 
 def bl_save_as_file(file: str) -> bool:
@@ -63,20 +61,6 @@ def get_tmp_dir() -> str:
         return None
 
     return build_dir + "\\tmp"
-
-def get_assets_dir() -> str:
-    build_dir = get_build_dir()
-    if not build_dir:
-        return None
-
-    return build_dir + "\\assets"
-
-def get_export_dir() -> str:
-    build_dir = get_build_dir()
-    if not build_dir:
-        return None
-
-    return build_dir + "\\export"
 
 def create_tmp_blend() -> str:
     return __create_tmp_file("blend")

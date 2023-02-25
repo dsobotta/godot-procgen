@@ -10,6 +10,9 @@
 # Missing function or method docstring
 # pylint: disable=C0116
 
+# Line too long
+# pylint: disable=C0301
+
 # Too few public methods OMEGALUL
 # pylint: disable=R0903
 
@@ -30,21 +33,27 @@ class GenVariants(build_step.BuildStep):
     def run(self) -> bool:
 
         variations = 5
-        out_dir = utils.get_assets_dir() + "\\models"
+        out_dir = utils.get_build_dir() + "\\assets\\models"
 
-        bpy.ops.object.select_all(action='DESELECT')
+        for w in bpy.context.window_manager.windows:
+            s = w.screen
+            for a in s.areas:
+                if a.type == "VIEW_3D":
+                    with bpy.context.temp_override(window=w, area=a):
+                        bpy.ops.object.mode_set(mode='OBJECT')
+                        bpy.ops.object.select_all(action='DESELECT')
 
-        #todo: handle multiple exporting multiple invariant objects from one source file
-        for obj in bpy.data.objects:
-            obj.select_set(True)
-            bpy.ops.object.mode_set(mode='OBJECT')
+                        #todo: handle multiple exporting multiple invariant objects from one source file
+                        for obj in bpy.data.objects:
+                            obj.select_set(True)
+                            bpy.ops.object.mode_set(mode='OBJECT')
 
-            for i in range(variations):
-                #perform variation logic
+                            for i in range(variations):
+                                #perform variation logic
 
-                utils.bl_save_as_file(out_dir + "\\" + self.__base_name + str(i+1) + ".blend")
+                                utils.bl_save_as_file(out_dir + "\\" + self.__base_name + str(i+1) + ".blend")
 
-            obj.select_set(False)
+                            obj.select_set(False)
 
         self._cleanup()
 
