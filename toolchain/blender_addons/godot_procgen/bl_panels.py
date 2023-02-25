@@ -22,5 +22,18 @@ class GDPG_PT_MainPanel(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
-        row = layout.row()
-        row.label(text="YEP")
+        col = layout.column()
+
+        col.label(text="Build")
+        col.operator("gdpg.clean")
+        col.operator("gdpg.build")
+        col.operator("gdpg.rebuild")
+
+        col.label(text="Partial Steps")
+        col.operator("gdpg.gen_variants")
+
+def register():
+    bpy.utils.register_class(GDPG_PT_MainPanel)
+
+def unregister():
+    bpy.utils.unregister_class(GDPG_PT_MainPanel)

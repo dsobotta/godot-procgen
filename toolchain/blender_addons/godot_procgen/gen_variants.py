@@ -10,9 +10,9 @@
 # Missing function or method docstring
 # pylint: disable=C0116
 
-import uuid
-import bpy
+from . import utils
 
-# class GenPermutations(bpy.types.Operator):
-#     bl_label = "Generate Permutations"
-#     bl_idname = "gdpg.generate_permutations"
+def run() -> bool:
+    _tmp_file = utils.create_tmp_blend()
+
+    return True

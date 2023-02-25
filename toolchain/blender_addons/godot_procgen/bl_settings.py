@@ -22,7 +22,7 @@ class GlobalSettings(bpy.types.AddonPreferences):
     )
 
     build_dir: bpy.props.StringProperty(
-        name = "Absolute Build Path",
+        name = "Build Path",
         subtype = "FILE_PATH",
         default= "C:\\Users\\duste\\git\\godot-procgen\\build\\"
     )
@@ -32,3 +32,9 @@ class GlobalSettings(bpy.types.AddonPreferences):
         layout.label(text = "### GLOBAL SETTINGS ###")
         layout.prop(self, "source_dir")
         layout.prop(self, "build_dir")
+
+def register():
+    bpy.utils.register_class(GlobalSettings)
+
+def unregister():
+    bpy.utils.unregister_class(GlobalSettings)
