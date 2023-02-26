@@ -31,7 +31,7 @@ class ExportModels(build_step.BuildStep):
         utils.bl_save_as_file(utils.create_tmp_blend())
 
     def run(self) -> bool:
-        out_dir = utils.get_build_dir() + "\\export\\models"
+        out_dir = utils.get_build_dir() + "/export/models"
         utils.create_dir(out_dir)
 
         for w in bpy.context.window_manager.windows:
@@ -46,7 +46,7 @@ class ExportModels(build_step.BuildStep):
                         for obj in bpy.data.objects:
                             obj.select_set(True)
                             bpy.ops.object.convert(target='MESH')
-                            bpy.ops.export_scene.gltf(filepath=out_dir + "\\" + self.__base_name, export_format='GLB')
+                            bpy.ops.export_scene.gltf(filepath=out_dir + "/" + self.__base_name, export_format='GLB')
                             obj.select_set(False)
 
         self._cleanup()

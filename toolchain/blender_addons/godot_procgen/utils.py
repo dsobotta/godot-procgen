@@ -60,7 +60,7 @@ def get_tmp_dir() -> str:
     if not build_dir:
         return None
 
-    return build_dir + "\\tmp"
+    return build_dir + "/tmp"
 
 def create_tmp_blend() -> str:
     return __create_tmp_file("blend")
@@ -79,7 +79,7 @@ def __create_tmp_file(extension: str) -> str:
     create_dir(tmp_dir_path)
 
     filename = uuid.uuid4().hex
-    out_path = tmp_dir_path + "\\" + filename + "." + extension
+    out_path = tmp_dir_path + "/" + filename + "." + extension
     pathlib.Path(out_path).touch()
     return out_path
 
