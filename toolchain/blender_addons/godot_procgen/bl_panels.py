@@ -30,8 +30,8 @@ class GDPG_PT_MainPanel(bpy.types.Panel):
         col.operator("gdpg.rebuild")
 
         col.label(text="Current File")
-        col.operator("gdpg.gen_variants")
-        col.operator("gdpg.export_models")
+        col.operator("gdpg.clean_current")
+        col.operator("gdpg.build_current")
 
 def register():
     bpy.utils.register_class(GDPG_PT_MainPanel)

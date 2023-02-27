@@ -19,7 +19,7 @@ class GlobalSettings(bpy.types.AddonPreferences):
     project_file: bpy.props.StringProperty(
         name = "Godot ProcGen Project File",
         subtype = "FILE_PATH",
-        default= "C:\\Users\\dusten\\git\\godot-procgen\\samples\\forest\\project.gdpg"
+        default= "C:\\Users\\duste\\git\\godot-procgen\\samples\\forest\\project.gdpg"
     )
 
     def draw(self, _context):

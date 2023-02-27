@@ -18,7 +18,7 @@ import bpy
 
 def bl_result(task_result: bool) -> set:
     if not task_result:
-        return {"CANCELED"}
+        return {"CANCELLED"}
     return {"FINISHED"}
 
 def create_dir(path: str) -> bool:
@@ -53,22 +53,26 @@ def get_project_dir() -> str:
         print("GDPG ERROR: get_project_dir() failed to find valid project file")
         return None
 
-    return os.path.dirname(project_file_path)
+    dirname = os.path.dirname(project_file_path)
+    return os.path.abspath(dirname)
 
 def get_source_dir() -> str:
-    blender_src = os.path.join(get_project_dir(), "blender_src")
-    return os.path.abspath(blender_src)
+    return os.path.join(get_project_dir(), "blender_src")
 
 def get_build_dir() -> str:
-    build_dir = os.path.join(get_project_dir(), "build")
-    return os.path.abspath(build_dir)
+    return os.path.join(get_project_dir(), "build")
 
 def get_tmp_dir() -> str:
-    build_dir = get_build_dir()
-    if not build_dir:
-        return None
+    return os.path.join(get_build_dir(), "tmp")
 
-    return os.path.join(build_dir, "tmp")
+def get_variants_dir() -> str:
+    return os.path.join(get_build_dir(), "variants")
+
+def get_binary_dir() -> str:
+    return os.path.join(get_build_dir(), "binary")
+
+def get_godot_generated_dir() -> str:
+    return os.path.join(get_project_dir(), "godot", "generated")
 
 def create_tmp_blend() -> str:
     return __create_tmp_file("blend")
@@ -92,8 +96,11 @@ def __create_tmp_file(extension: str) -> str:
     return out_path
 
 def __clean_recursive(path: str) -> bool:
-    if os.path.exists(path):
+    if os.path.isdir(path):
         shutil.rmtree(path)
+        print("GDPG: Cleaned path: " + path)
+    else:
+        print("GDPG: Path already clean: " + path)
 
     #todo: improve error handling here
     return True

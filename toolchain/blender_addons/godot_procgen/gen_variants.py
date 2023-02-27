@@ -25,18 +25,22 @@ from . import build_step
 class GenVariants(build_step.BuildStep):
 
     __base_name = ""
+    __rel_path = ""
 
     def __init__(self, operand: str):
         self.__base_name = pathlib.Path(operand).stem
+        rel_filename = os.path.relpath(operand, utils.get_source_dir())
+        self.__rel_path = os.path.dirname(rel_filename)
         utils.bl_open_file(operand)
         utils.bl_save_as_file(utils.create_tmp_blend())
 
     def run(self) -> bool:
 
         variations = 5
-        out_dir = os.path.join(utils.get_build_dir(), "assets", "models")
+        out_dir = os.path.join(utils.get_variants_dir(), self.__rel_path, self.__base_name)
         utils.create_dir(out_dir)
 
+        #https://blenderartists.org/t/bad-context-after-open-new-file-with-python/1398392
         for w in bpy.context.window_manager.windows:
             s = w.screen
             for a in s.areas:
