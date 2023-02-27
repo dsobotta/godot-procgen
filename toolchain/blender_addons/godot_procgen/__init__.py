@@ -37,18 +37,12 @@ modules = {
 }
 
 def register():
-    #for mod in modules:
-    #    mod.register()
-    cmds.register()
-    panels.register()
-    settings.register()
+    for mod in modules:
+        mod.register()
 
 def unregister():
-    #for mod in modules:
-    #    mod.unregister()
-    cmds.unregister()
-    panels.unregister()
-    settings.unregister()
+    for mod in modules:
+        mod.unregister()
 
 if __name__ == "__main__":
     register()

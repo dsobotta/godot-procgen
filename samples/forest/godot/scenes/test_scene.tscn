@@ -32,19 +32,19 @@ volumetric_fog_density = 0.004
 [node name="Node3D" type="Node3D"]
 
 [node name="rock1" parent="." instance=ExtResource("1_l3pn4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.2365, 0, -10.932)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 10, -40)
 
 [node name="rock2" parent="." instance=ExtResource("2_a6vhq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5211, 0, 7.73913)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 10, -20)
 
 [node name="rock3" parent="." instance=ExtResource("3_78oik")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.4515, 0, 24.6468)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 10, 0)
 
 [node name="rock4" parent="." instance=ExtResource("4_ynr33")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.1271, 0, 43.1383)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 10, 20)
 
 [node name="rock5" parent="." instance=ExtResource("5_vphat")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.9485, -4.76837e-07, 63.1992)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 10, 40)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_f21dg")
