@@ -10,6 +10,9 @@
 # Missing function or method docstring
 # pylint: disable=C0116
 
+# Line too long
+# pylint: disable=C0301
+
 # Too few public methods OMEGALUL
 # pylint: disable=R0903
 
@@ -20,7 +23,7 @@ from . import utils
 class BuildStep(ABC):
 
     @abstractmethod
-    def __init__(self, operand: str):
+    def __init__(self, operand: str, **kwargs):
         pass
 
     @abstractmethod
@@ -41,12 +44,12 @@ def build_open_file(build_step: BuildStep) -> bool:
     return result
 
 #todo: optimization
-def batch_build_in_dir(build_step: BuildStep, root_path: str, filename_wildcard: str) -> bool:
+def batch_build_in_dir(build_step: BuildStep, root_path: str, filename_wildcard: str, **kwargs) -> bool:
 
     orig_file = utils.bl_get_curr_file()
 
     for file in pathlib.Path(root_path).glob("**/" + filename_wildcard):
-        step_instance = build_step(str(file))
+        step_instance = build_step(str(file), **kwargs)
         if not step_instance.run():
             return False
 

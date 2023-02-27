@@ -14,6 +14,12 @@ import bpy
 from .. import core
 from .. import build
 
+def _gen_args() -> dict:
+    args = {
+        'variants': 3,
+    }
+    return args
+
 class Clean(bpy.types.Operator):
     bl_label = "Clean All"
     bl_idname = "gdpg.clean"
@@ -26,14 +32,16 @@ class Build(bpy.types.Operator):
     bl_idname = "gdpg.build"
 
     def execute(self, context):
-        return core.utils.bl_result(build.cmds.build())
+        args = _gen_args()
+        return core.utils.bl_result(build.cmds.build(**args))
 
 class Rebuild(bpy.types.Operator):
     bl_label = "Re-Build All"
     bl_idname = "gdpg.rebuild"
 
     def execute(self, context):
-        return core.utils.bl_result(build.cmds.rebuild())
+        args = _gen_args()
+        return core.utils.bl_result(build.cmds.rebuild(**args))
 
 class CleanCurrent(bpy.types.Operator):
     bl_label = "Clean Current File"

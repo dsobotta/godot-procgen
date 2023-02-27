@@ -29,21 +29,26 @@ def clean() -> bool:
     core.utils.clean_build_dir()
     return True
 
-def build() -> bool:
+def build(**kwargs) -> bool:
+    args = {
+        'variants': 5,
+    }
+    #debug_args_update(args, kwargs)
+    args.update(kwargs)
 
     print("GDPG: GENERATING MODEL VARIANTS...")
     models_src = os.path.join(core.utils.get_source_dir(), "models")
-    if not core.buildstep.batch_build_in_dir(GenVariants, models_src, "*.blend"):
+    if not core.buildstep.batch_build_in_dir(GenVariants, models_src, "*.blend", **args):
         return False
     print("GDPG: GENERATING MODEL VARIANTS...DONE")
 
     print("GDPG: EXPORTING BINARY MODELS...")
-    if not core.buildstep.batch_build_in_dir(ExportModels, core.utils.get_variants_dir(), "*.blend"):
+    if not core.buildstep.batch_build_in_dir(ExportModels, core.utils.get_variants_dir(), "*.blend", **args):
         return False
     print("GDPG: EXPORTING BINARY MODELS...DONE")
 
     print("GDPG: COPYING RESULTS...")
-    if not core.buildstep.batch_build_in_dir(CopyResults, core.utils.get_binary_dir(), "*.glb"):
+    if not core.buildstep.batch_build_in_dir(CopyResults, core.utils.get_binary_dir(), "*.glb", **args):
         return False
     print("GDPG: COPYING RESULTS...DONE")
 
@@ -57,10 +62,19 @@ def build_current() -> bool:
     print("NOT IMPLEMENTED")
     return False
 
-def rebuild() -> bool:
+def rebuild(**kwargs) -> bool:
     if not clean():
         return False
-    if not build():
+    if not build(**kwargs):
         return False
 
     return True
+
+def debug_args_update(default_args: dict, kwargs: dict) -> None:
+    print("cmds::debug_args(...) default_args = ")
+    print(default_args)
+    print("cmds::debug_args(...) kwargs = ")
+    print(kwargs)
+    default_args.update(kwargs)
+    print("cmds::debug_args(...) updated_args= ")
+    print(default_args)

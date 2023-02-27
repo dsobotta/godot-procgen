@@ -26,7 +26,7 @@ class ExportModels(core.buildstep.BuildStep):
     __base_name = ""
     __rel_path = ""
 
-    def __init__(self, operand: str):
+    def __init__(self, operand: str, **kwargs):
         self.__base_name = pathlib.Path(operand).stem
         rel_filename = os.path.relpath(operand, core.utils.get_variants_dir())
         self.__rel_path = os.path.dirname(rel_filename)

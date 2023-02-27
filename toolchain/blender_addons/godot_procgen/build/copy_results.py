@@ -27,7 +27,7 @@ class CopyResults(core.buildstep.BuildStep):
     __filename = ""
     __rel_path = ""
 
-    def __init__(self, operand: str):
+    def __init__(self, operand: str, **kwargs):
         self.__src_path = operand
         self.__filename = pathlib.Path(operand).name
         rel_filename = os.path.relpath(operand, core.utils.get_binary_dir())

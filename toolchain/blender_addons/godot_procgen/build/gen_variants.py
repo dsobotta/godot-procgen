@@ -21,17 +21,18 @@ import pathlib
 import random
 import bpy
 from .. import core
-from ..core import buildstep
 
 class GenVariants(core.buildstep.BuildStep):
 
     __base_name = ""
     __rel_path = ""
+    __num_variants = 1
 
-    def __init__(self, operand: str):
+    def __init__(self, operand: str, **kwargs):
         self.__base_name = pathlib.Path(operand).stem
         rel_filename = os.path.relpath(operand, core.utils.get_source_dir())
         self.__rel_path = os.path.dirname(rel_filename)
+        self.__num_variants = kwargs.get('variants', 5)
         core.utils.bl_open_file(operand)
         core.utils.bl_save_as_file(core.utils.create_tmp_blend())
 
@@ -71,7 +72,6 @@ class GenVariants(core.buildstep.BuildStep):
                 continue
 
     def run(self) -> bool:
-        variations = 5
         out_dir = os.path.join(core.utils.get_variants_dir(), self.__rel_path, self.__base_name)
         core.utils.create_dir(out_dir)
 
@@ -87,7 +87,7 @@ class GenVariants(core.buildstep.BuildStep):
                         #todo: handle multiple exporting multiple invariant objects from one source file
                         for obj in bpy.data.objects:
                             obj.select_set(True)
-                            for i in range(variations):
+                            for i in range(self.__num_variants):
                                 for modifier in bpy.context.object.modifiers:
                                     if isinstance(modifier, bpy.types.NodesModifier):
                                         self.randomize_inputs(modifier)
