@@ -10,6 +10,7 @@
 # Missing function or method docstring
 # pylint: disable=C0116
 
+import os
 from . import utils
 from .build_step import batch_build_in_dir
 from .gen_variants import GenVariants
@@ -22,12 +23,14 @@ def clean() -> bool:
 def build() -> bool:
 
     print("GDPG: GENERATING MODEL VARIANTS...")
-    if not batch_build_in_dir(GenVariants, utils.get_source_dir() + "/models", "*.blend"):
+    path = os.path.join(utils.get_source_dir(), "models")
+    if not batch_build_in_dir(GenVariants, path, "*.blend"):
         return False
     print("GDPG: GENERATING MODEL VARIANTS...DONE")
 
     print("GDPG: EXPORTING MODELS...")
-    if not batch_build_in_dir(ExportModels, utils.get_build_dir() + "/assets/models", "*.blend"):
+    path = os.path.join(utils.get_build_dir(), "assets", "models")
+    if not batch_build_in_dir(ExportModels, path, "*.blend"):
         return False
     print("GDPG: EXPORTING MODELS...DONE")
 

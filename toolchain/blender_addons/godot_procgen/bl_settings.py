@@ -18,13 +18,13 @@ class GlobalSettings(bpy.types.AddonPreferences):
     source_dir: bpy.props.StringProperty(
         name = "Source Assets",
         subtype = "FILE_PATH",
-        default= "/home/dusten/git/godot-procgen/blender/"
+        default= "C:\\Users\\duste\\git\\godot-procgen\\blender"
     )
 
     build_dir: bpy.props.StringProperty(
         name = "Build Path",
         subtype = "FILE_PATH",
-        default= "/home/dusten/git/godot-procgen/build/"
+        default= "C:\\Users\\duste\\git\\godot-procgen\\build"
     )
 
     def draw(self, _context):

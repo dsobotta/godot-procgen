@@ -37,7 +37,6 @@ def bl_open_file(file: str) -> bool:
         return False
 
     bpy.ops.wm.open_mainfile(filepath=file)
-    print("GDPG: opened file: " + file)
     return True
 
 def bl_save_as_file(file: str) -> bool:
@@ -60,7 +59,7 @@ def get_tmp_dir() -> str:
     if not build_dir:
         return None
 
-    return build_dir + "/tmp"
+    return os.path.join(build_dir, "tmp")
 
 def create_tmp_blend() -> str:
     return __create_tmp_file("blend")
@@ -79,7 +78,7 @@ def __create_tmp_file(extension: str) -> str:
     create_dir(tmp_dir_path)
 
     filename = uuid.uuid4().hex
-    out_path = tmp_dir_path + "/" + filename + "." + extension
+    out_path = os.path.join(tmp_dir_path, filename + "." + extension)
     pathlib.Path(out_path).touch()
     return out_path
 

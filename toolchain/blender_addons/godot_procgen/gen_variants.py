@@ -16,6 +16,7 @@
 # Too few public methods OMEGALUL
 # pylint: disable=R0903
 
+import os
 import pathlib
 import bpy
 from . import utils
@@ -33,7 +34,8 @@ class GenVariants(build_step.BuildStep):
     def run(self) -> bool:
 
         variations = 5
-        out_dir = utils.get_build_dir() + "/assets/models"
+        out_dir = os.path.join(utils.get_build_dir(), "assets", "models")
+        utils.create_dir(out_dir)
 
         for w in bpy.context.window_manager.windows:
             s = w.screen
@@ -50,8 +52,8 @@ class GenVariants(build_step.BuildStep):
 
                             for i in range(variations):
                                 #perform variation logic
-
-                                utils.bl_save_as_file(out_dir + "/" + self.__base_name + str(i+1) + ".blend")
+                                path = os.path.join(out_dir, self.__base_name + str(i+1) + ".blend")
+                                utils.bl_save_as_file(path)
 
                             obj.select_set(False)
 
