@@ -15,23 +15,17 @@ import bpy
 class GlobalSettings(bpy.types.AddonPreferences):
     bl_idname = __package__
 
-    source_dir: bpy.props.StringProperty(
-        name = "Source Assets",
+    #todo: replace this with a project manager configurable field
+    project_file: bpy.props.StringProperty(
+        name = "Godot ProcGen Project File",
         subtype = "FILE_PATH",
-        default= "C:\\Users\\duste\\git\\godot-procgen\\blender"
-    )
-
-    build_dir: bpy.props.StringProperty(
-        name = "Build Path",
-        subtype = "FILE_PATH",
-        default= "C:\\Users\\duste\\git\\godot-procgen\\build"
+        default= "C:\\Users\\dusten\\git\\godot-procgen\\samples\\forest\\project.gdpg"
     )
 
     def draw(self, _context):
         layout = self.layout
         layout.label(text = "### GLOBAL SETTINGS ###")
-        layout.prop(self, "source_dir")
-        layout.prop(self, "build_dir")
+        layout.prop(self, "project_file")
 
 def register():
     bpy.utils.register_class(GlobalSettings)

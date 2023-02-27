@@ -46,12 +46,21 @@ def bl_save_as_file(file: str) -> bool:
     bpy.ops.wm.save_as_mainfile(filepath=file)
     return True
 
+def get_project_dir() -> str:
+    project_file_path = bpy.context.preferences.addons[__package__].preferences.project_file
+
+    if not project_file_path:
+        print("GDPG ERROR: get_project_dir() failed to find valid project file")
+        return None
+
+    return os.path.dirname(project_file_path)
+
 def get_source_dir() -> str:
-    source_dir = bpy.context.preferences.addons[__package__].preferences.source_dir
-    return os.path.abspath(source_dir)
+    blender_src = os.path.join(get_project_dir(), "blender_src")
+    return os.path.abspath(blender_src)
 
 def get_build_dir() -> str:
-    build_dir = bpy.context.preferences.addons[__package__].preferences.build_dir
+    build_dir = os.path.join(get_project_dir(), "build")
     return os.path.abspath(build_dir)
 
 def get_tmp_dir() -> str:
