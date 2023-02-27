@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=3 uid="uid://b1dohjy57kamr"]
+
+[ext_resource type="PackedScene" uid="uid://c4nvy5jhotkda" path="res://generated/models/rock/rock1.glb" id="1_l3pn4"]
+[ext_resource type="PackedScene" uid="uid://cj06xslxnve3e" path="res://generated/models/rock/rock2.glb" id="2_a6vhq"]
+[ext_resource type="PackedScene" uid="uid://cg3xlfumfqug" path="res://generated/models/rock/rock3.glb" id="3_78oik"]
+[ext_resource type="PackedScene" uid="uid://pfj6clxdlroc" path="res://generated/models/rock/rock4.glb" id="4_ynr33"]
+[ext_resource type="PackedScene" uid="uid://vfhjjos4t0s0" path="res://generated/models/rock/rock5.glb" id="5_vphat"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sjgwf"]
+
+[sub_resource type="Sky" id="Sky_nuqei"]
+sky_material = SubResource("ProceduralSkyMaterial_sjgwf")
+process_mode = 1
+radiance_size = 4
+
+[sub_resource type="Environment" id="Environment_f21dg"]
+background_mode = 2
+sky = SubResource("Sky_nuqei")
+tonemap_mode = 3
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+glow_normalized = true
+fog_density = 0.005
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.004
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_cxyay"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="rock1" parent="." instance=ExtResource("1_l3pn4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.2365, 0, -10.932)
+
+[node name="rock2" parent="." instance=ExtResource("2_a6vhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5211, 0, 7.73913)
+
+[node name="rock3" parent="." instance=ExtResource("3_78oik")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.4515, 0, 24.6468)
+
+[node name="rock4" parent="." instance=ExtResource("4_ynr33")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.1271, 0, 43.1383)
+
+[node name="rock5" parent="." instance=ExtResource("5_vphat")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.9485, -4.76837e-07, 63.1992)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_f21dg")
+camera_attributes = SubResource("CameraAttributesPractical_cxyay")
