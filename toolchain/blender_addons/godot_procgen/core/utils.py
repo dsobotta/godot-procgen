@@ -10,11 +10,17 @@
 # Missing function or method docstring
 # pylint: disable=C0116
 
+# Line too long
+# pylint: disable=C0301
+
 import uuid
 import os
 import pathlib
 import shutil
 import bpy
+
+def get_toplevel_package() -> str:
+    return "godot_procgen"
 
 def bl_result(task_result: bool) -> set:
     if not task_result:
@@ -47,7 +53,7 @@ def bl_save_as_file(file: str) -> bool:
     return True
 
 def get_project_dir() -> str:
-    project_file_path = bpy.context.preferences.addons[__package__].preferences.project_file
+    project_file_path = bpy.context.preferences.addons[get_toplevel_package()].preferences.project_file
 
     if not project_file_path:
         print("GDPG ERROR: get_project_dir() failed to find valid project file")

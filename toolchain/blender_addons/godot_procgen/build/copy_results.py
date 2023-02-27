@@ -19,10 +19,9 @@
 import os
 import pathlib
 import shutil
-from . import utils
-from . import build_step
+from .. import core
 
-class CopyResults(build_step.BuildStep):
+class CopyResults(core.buildstep.BuildStep):
 
     __src_path = ""
     __filename = ""
@@ -31,12 +30,12 @@ class CopyResults(build_step.BuildStep):
     def __init__(self, operand: str):
         self.__src_path = operand
         self.__filename = pathlib.Path(operand).name
-        rel_filename = os.path.relpath(operand, utils.get_binary_dir())
+        rel_filename = os.path.relpath(operand, core.utils.get_binary_dir())
         self.__rel_path = os.path.dirname(rel_filename)
 
     def run(self) -> bool:
-        out_dir = os.path.join(utils.get_godot_generated_dir(), self.__rel_path)
-        utils.create_dir(out_dir)
+        out_dir = os.path.join(core.utils.get_godot_generated_dir(), self.__rel_path)
+        core.utils.create_dir(out_dir)
         out_file = os.path.join(out_dir, self.__filename)
         shutil.copyfile(self.__src_path, out_file)
 

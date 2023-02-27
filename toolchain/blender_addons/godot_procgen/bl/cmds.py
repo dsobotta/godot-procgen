@@ -11,43 +11,43 @@
 # pylint: disable=C0116
 
 import bpy
-from . import build_cmds
-from . import utils
+from .. import core
+from .. import build
 
 class Clean(bpy.types.Operator):
     bl_label = "Clean All"
     bl_idname = "gdpg.clean"
 
     def execute(self, context):
-        return utils.bl_result(build_cmds.clean())
+        return core.utils.bl_result(build.cmds.clean())
 
 class Build(bpy.types.Operator):
     bl_label = "Build All"
     bl_idname = "gdpg.build"
 
     def execute(self, context):
-        return utils.bl_result(build_cmds.build())
+        return core.utils.bl_result(build.cmds.build())
 
 class Rebuild(bpy.types.Operator):
     bl_label = "Re-Build All"
     bl_idname = "gdpg.rebuild"
 
     def execute(self, context):
-        return utils.bl_result(build_cmds.rebuild())
+        return core.utils.bl_result(build.cmds.rebuild())
 
 class CleanCurrent(bpy.types.Operator):
     bl_label = "Clean Current File"
     bl_idname = "gdpg.clean_current"
 
     def execute(self, context):
-        return utils.bl_result(build_cmds.clean_current())
+        return core.utils.bl_result(build.cmds.clean_current())
 
 class BuildCurrent(bpy.types.Operator):
     bl_label = "Build Current File"
     bl_idname = "gdpg.build_current"
 
     def execute(self, context):
-        return utils.bl_result(build_cmds.build_current())
+        return core.utils.bl_result(build.cmds.build_current())
 
 def register():
     bpy.utils.register_class(Clean)

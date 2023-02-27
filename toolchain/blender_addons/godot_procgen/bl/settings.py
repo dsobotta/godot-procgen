@@ -10,10 +10,12 @@
 # Missing function or method docstring
 # pylint: disable=C0116
 
+from .. import core
+
 import bpy
 
 class GlobalSettings(bpy.types.AddonPreferences):
-    bl_idname = __package__
+    bl_idname = core.utils.get_toplevel_package()
 
     #todo: replace this with a project manager configurable field
     project_file: bpy.props.StringProperty(

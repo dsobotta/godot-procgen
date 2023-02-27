@@ -10,10 +10,12 @@
 # Missing function or method docstring
 # pylint: disable=C0116
 
+from . import bl
+from . import build
+from . import core
+
 import bpy
-from . import bl_cmds
-from . import bl_panels
-from . import bl_settings
+from .bl import cmds, panels, settings
 
 #notes
 #python-defined geo nodes -  https://devtalk.blender.org/t/extra-nodes-for-geometrynodes/20942/2
@@ -28,15 +30,25 @@ bl_info = {
     "version": (0,0,1)
 }
 
+modules = {
+    cmds,
+    panels,
+    settings
+}
+
 def register():
-    bl_cmds.register()
-    bl_panels.register()
-    bl_settings.register()
+    #for mod in modules:
+    #    mod.register()
+    cmds.register()
+    panels.register()
+    settings.register()
 
 def unregister():
-    bl_cmds.unregister()
-    bl_panels.unregister()
-    bl_settings.unregister()
+    #for mod in modules:
+    #    mod.unregister()
+    cmds.unregister()
+    panels.unregister()
+    settings.unregister()
 
 if __name__ == "__main__":
     register()

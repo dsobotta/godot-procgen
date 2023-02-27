@@ -19,26 +19,26 @@
 import os
 import pathlib
 import bpy
-from . import utils
-from . import build_step
+from .. import core
+from ..core import buildstep
 
-class GenVariants(build_step.BuildStep):
+class GenVariants(core.buildstep.BuildStep):
 
     __base_name = ""
     __rel_path = ""
 
     def __init__(self, operand: str):
         self.__base_name = pathlib.Path(operand).stem
-        rel_filename = os.path.relpath(operand, utils.get_source_dir())
+        rel_filename = os.path.relpath(operand, core.utils.get_source_dir())
         self.__rel_path = os.path.dirname(rel_filename)
-        utils.bl_open_file(operand)
-        utils.bl_save_as_file(utils.create_tmp_blend())
+        core.utils.bl_open_file(operand)
+        core.utils.bl_save_as_file(core.utils.create_tmp_blend())
 
     def run(self) -> bool:
 
         variations = 5
-        out_dir = os.path.join(utils.get_variants_dir(), self.__rel_path, self.__base_name)
-        utils.create_dir(out_dir)
+        out_dir = os.path.join(core.utils.get_variants_dir(), self.__rel_path, self.__base_name)
+        core.utils.create_dir(out_dir)
 
         #https://blenderartists.org/t/bad-context-after-open-new-file-with-python/1398392
         for w in bpy.context.window_manager.windows:
@@ -57,7 +57,7 @@ class GenVariants(build_step.BuildStep):
                             for i in range(variations):
                                 #perform variation logic
                                 path = os.path.join(out_dir, self.__base_name + str(i+1) + ".blend")
-                                utils.bl_save_as_file(path)
+                                core.utils.bl_save_as_file(path)
 
                             obj.select_set(False)
 

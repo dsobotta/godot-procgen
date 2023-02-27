@@ -19,24 +19,23 @@
 import os
 import pathlib
 import bpy
-from . import utils
-from . import build_step
+from .. import core
 
-class ExportModels(build_step.BuildStep):
+class ExportModels(core.buildstep.BuildStep):
 
     __base_name = ""
     __rel_path = ""
 
     def __init__(self, operand: str):
         self.__base_name = pathlib.Path(operand).stem
-        rel_filename = os.path.relpath(operand, utils.get_variants_dir())
+        rel_filename = os.path.relpath(operand, core.utils.get_variants_dir())
         self.__rel_path = os.path.dirname(rel_filename)
-        utils.bl_open_file(operand)
-        utils.bl_save_as_file(utils.create_tmp_blend())
+        core.utils.bl_open_file(operand)
+        core.utils.bl_save_as_file(core.utils.create_tmp_blend())
 
     def run(self) -> bool:
-        out_dir = os.path.join(utils.get_binary_dir(), self.__rel_path)
-        utils.create_dir(out_dir)
+        out_dir = os.path.join(core.utils.get_binary_dir(), self.__rel_path)
+        core.utils.create_dir(out_dir)
 
         for w in bpy.context.window_manager.windows:
             s = w.screen
