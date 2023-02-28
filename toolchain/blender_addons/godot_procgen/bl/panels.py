@@ -12,6 +12,32 @@
 
 import bpy
 
+class GDPG_PT_BuildOptions(bpy.types.Panel):
+    bl_parent_id = "GDPG_PT_MainPanel"
+    bl_idname = "GDPG_PT_BuildOptions"
+    bl_label = "Build Options"
+    bl_space_type = 'VIEW_3D'
+    bl_region_type = 'UI'
+    bl_options = {'DEFAULT_CLOSED'}
+
+    def draw(self, context):
+        layout = self.layout
+        layout.label(text="test123")
+
+class GDPG_PT_Build(bpy.types.Panel):
+    bl_parent_id = "GDPG_PT_MainPanel"
+    bl_idname = "GDPG_PT_Build"
+    bl_label = "Build"
+    bl_space_type = 'VIEW_3D'
+    bl_region_type = 'UI'
+    #bl_options = {'DEFAULT_CLOSED,'HIDE_HEADER', 'INSTANCED', 'HEADER_LAYOUT_EXPAND'}
+
+    def draw(self, context):
+        layout = self.layout
+        layout.operator("gdpg.clean")
+        layout.operator("gdpg.build")
+        layout.operator("gdpg.rebuild")
+
 class GDPG_PT_MainPanel(bpy.types.Panel):
     bl_idname = "GDPG_PT_MainPanel"
     bl_label = "Godot ProcGen"
@@ -21,20 +47,28 @@ class GDPG_PT_MainPanel(bpy.types.Panel):
     bl_context = "objectmode"
 
     def draw(self, context):
-        layout = self.layout
-        col = layout.column()
+        pass
+        #layout = self.layout
+        #col = layout.column()
 
-        col.label(text="All Files")
-        col.operator("gdpg.clean")
-        col.operator("gdpg.build")
-        col.operator("gdpg.rebuild")
+        #sub = col.column()
+        #sub.label(text="All Files")
 
-        col.label(text="Current File")
-        col.operator("gdpg.clean_current")
-        col.operator("gdpg.build_current")
+        #sub = col.column()
+        #sub.label(text="Current File")
+        #sub.operator("gdpg.clean_current")
+        #sub.operator("gdpg.build_current")
+
+_panels = [
+    GDPG_PT_MainPanel,
+    GDPG_PT_BuildOptions,
+    GDPG_PT_Build
+]
 
 def register():
-    bpy.utils.register_class(GDPG_PT_MainPanel)
+    for panel in _panels:
+        bpy.utils.register_class(panel)
 
 def unregister():
-    bpy.utils.unregister_class(GDPG_PT_MainPanel)
+    for panel in _panels:
+        bpy.utils.unregister_class(panel)

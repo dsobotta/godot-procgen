@@ -10,9 +10,8 @@
 # Missing function or method docstring
 # pylint: disable=C0116
 
-from .. import core
-
 import bpy
+from .. import core
 
 class GlobalSettings(bpy.types.AddonPreferences):
     bl_idname = core.utils.get_toplevel_package()
