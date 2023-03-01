@@ -18,7 +18,7 @@ class GDPG_PT_BuildOptions(bpy.types.Panel):
     bl_label = "Build Options"
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
-    bl_options = {'DEFAULT_CLOSED'}
+    #bl_options = {'DEFAULT_CLOSED'}
 
     def draw(self, context):
         layout = self.layout
