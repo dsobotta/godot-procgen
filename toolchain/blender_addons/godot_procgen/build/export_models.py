@@ -31,27 +31,21 @@ class ExportModels(core.buildstep.BuildStep):
         rel_filename = os.path.relpath(operand, core.utils.get_variants_dir())
         self.__rel_path = os.path.dirname(rel_filename)
         core.utils.bl_open_file(operand)
-        core.utils.bl_save_as_file(core.utils.create_tmp_blend())
+        #core.utils.bl_save_as_file(core.utils.create_tmp_blend())
 
     def run(self) -> bool:
         out_dir = os.path.join(core.utils.get_binary_dir(), self.__rel_path)
         core.utils.create_dir(out_dir)
+        path = os.path.join(out_dir, self.__base_name)
 
+        #https://blenderartists.org/t/bad-context-after-open-new-file-with-python/1398392
         for w in bpy.context.window_manager.windows:
             s = w.screen
             for a in s.areas:
                 if a.type == "VIEW_3D":
                     with bpy.context.temp_override(window=w, area=a):
-                        bpy.ops.object.mode_set(mode='OBJECT')
-                        bpy.ops.object.select_all(action='DESELECT')
-
-                        #todo: handle multiple exporting multiple invariant objects from one source file
-                        for obj in bpy.data.objects:
-                            obj.select_set(True)
-                            bpy.ops.object.convert(target='MESH')
-                            path = os.path.join(out_dir, self.__base_name)
-                            bpy.ops.export_scene.gltf(filepath=path, export_format='GLB')
-                            obj.select_set(False)
+                        bpy.ops.export_scene.gltf(filepath=path, export_format='GLB')
+                        break
 
         self._cleanup()
 

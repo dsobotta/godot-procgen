@@ -26,12 +26,13 @@ class GenTerrain(core.buildstep.BuildStep):
 
     __base_name = ""
     __rel_path = ""
+    __tmp_filepath = ""
     __chunks_x: int = 1
     __chunks_y: int = 1
 
     def __init__(self, operand: str, **kwargs):
         args = {
-            'chunks_x': 4,
+            'chunks_x': 5,
             'chunks_y': 5,
         }
         args.update(kwargs)
@@ -41,9 +42,10 @@ class GenTerrain(core.buildstep.BuildStep):
         self.__base_name = pathlib.Path(operand).stem
         rel_filename = os.path.relpath(operand, core.utils.get_source_dir())
         self.__rel_path = os.path.dirname(rel_filename)
+        self.__tmp_filepath = core.utils.create_tmp_blend()
 
         core.utils.bl_open_file(operand)
-        core.utils.bl_save_as_file(core.utils.create_tmp_blend())
+        core.utils.bl_save_as_file(self.__tmp_filepath)
 
     def print_inputs(self, geo_node: bpy.types.NodesModifier):
         modifier_name = geo_node.name
@@ -55,9 +57,6 @@ class GenTerrain(core.buildstep.BuildStep):
             if is_int or is_float:
                 value = bpy.context.object.modifiers[modifier_name].get(identifier)
                 debug_data = [
-                    #'name': node_input.name,
-                    #'identifier': node_input.identifier,
-                    #'value': str(value)
                     node_input.name,
                     str(value)
                 ]
@@ -69,32 +68,43 @@ class GenTerrain(core.buildstep.BuildStep):
                 return node_input
         return None
 
-    def set_input_by_name(self, modifier: bpy.types.NodesModifier, input_name: str, value) -> bool:
+    # def get_input_by_name(self, modifier: bpy.types.NodesModifier, input_name: str, value):
+    #     nsi = self.nsi_by_name(modifier, input_name)
+    #     if nsi is None:
+    #         print("Error, failed to find NodeSocketInterface with name: " + input_name)
+    #         return 0
+
+    #     return bpy.context.object.modifiers[modifier.name].get(nsi.identifier)
+
+    #returns the value that was set
+    def set_input_by_name(self, modifier: bpy.types.NodesModifier, input_name: str, value):
         nsi = self.nsi_by_name(modifier, input_name)
         if nsi is None:
             print("Error, failed to find NodeSocketInterface with name: " + input_name)
-            return False
+            return 0
 
         bpy.context.object.modifiers[modifier.name][nsi.identifier] = value
-        return True
+        return value
 
-    def randomize_input_byname(self, modifier: bpy.types.NodesModifier, input_name: str) -> bool:
+    #returns the value that was set
+    def randomize_input_byname(self, modifier: bpy.types.NodesModifier, input_name: str):
         nsi = self.nsi_by_name(modifier, input_name)
         if nsi is None:
             print("Error, failed to find NodeSocketInterface with name: " + input_name)
-            return False
-        self.randomize_input(modifier, nsi)
-        return True
+            return 0
+        return self.randomize_input(modifier, nsi)
 
+    #returns the value that was set
     def randomize_input(self, modifier: bpy.types.NodesModifier, nsi: bpy.types.NodeSocketInterface):
         if isinstance(nsi, bpy.types.NodeSocketInterfaceInt):
             value = random.randrange(nsi.min_value, nsi.max_value)
             bpy.context.object.modifiers[modifier.name][nsi.identifier] = value
-            return
+            return value
         if isinstance(nsi, bpy.types.NodeSocketInterfaceFloat):
             value = random.uniform(nsi.min_value, nsi.max_value)
             bpy.context.object.modifiers[modifier.name][nsi.identifier] = value
-            return
+            return value
+        return 0
 
     def run(self) -> bool:
         #center chunks around origin
@@ -113,30 +123,46 @@ class GenTerrain(core.buildstep.BuildStep):
         out_dir = os.path.join(core.utils.get_variants_dir(), self.__rel_path, self.__base_name)
         core.utils.create_dir(out_dir)
 
-        #https://blenderartists.org/t/bad-context-after-open-new-file-with-python/1398392
-        for w in bpy.context.window_manager.windows:
-            s = w.screen
-            for a in s.areas:
-                if a.type == "VIEW_3D":
-                    with bpy.context.temp_override(window=w, area=a):
-                        bpy.ops.object.mode_set(mode='OBJECT')
-                        bpy.ops.object.select_all(action='DESELECT')
+        seed_set = False
+        shared_seed = 0
 
-                        for obj in bpy.data.objects:
-                            obj.select_set(True)
-                            for modifier in bpy.context.object.modifiers:
-                                if isinstance(modifier, bpy.types.NodesModifier):
-                                    self.randomize_input_byname(modifier, "Seed")
-                                    for x in range(min_grid_x, max_grid_x + 1):
-                                        for y in range(min_grid_y, max_grid_y + 1):
+        for x in range(min_grid_x, max_grid_x + 1):
+            for y in range(min_grid_y, max_grid_y + 1):
+                #re-open temp file (before mesh conversion) so we don't have to spam undo operations
+                core.utils.bl_open_file(self.__tmp_filepath)
+                chunk_name = self.__base_name + "_x" + str(x) + "_y" + str(y)
+
+                #https://blenderartists.org/t/bad-context-after-open-new-file-with-python/1398392
+                for w in bpy.context.window_manager.windows:
+                    s = w.screen
+                    for a in s.areas:
+                        if a.type == "VIEW_3D":
+                            with bpy.context.temp_override(window=w, area=a):
+                                bpy.ops.object.mode_set(mode='OBJECT')
+                                bpy.ops.object.select_all(action='DESELECT')
+
+                                for obj in bpy.data.objects:
+                                    obj.select_set(True)
+                                    for modifier in bpy.context.object.modifiers:
+                                        if isinstance(modifier, bpy.types.NodesModifier):
+                                            if not seed_set:
+                                                shared_seed = self.randomize_input_byname(modifier, "Seed")
+                                                seed_set = True
+                                            else:
+                                                self.set_input_by_name(modifier, "Seed", shared_seed)
+
                                             self.set_input_by_name(modifier, "GridX", x)
                                             self.set_input_by_name(modifier, "GridY", y)
                                             self.print_inputs(modifier)
 
-                                            name_postfix = "_x" + str(x) + "_y" + str(y) + ".blend"
-                                            path = os.path.join(out_dir, self.__base_name + name_postfix)
-                                            core.utils.bl_save_as_file(path)
-                            obj.select_set(False)
+                                    bpy.ops.object.convert(target='MESH')
+                                    obj.name = chunk_name + "_genobj"
+                                    obj.data.name = "genmesh"
+
+                                    path = os.path.join(out_dir, chunk_name + ".blend")
+                                    core.utils.bl_save_as_file(path)
+                                    obj.select_set(False)
+                                break
 
         self._cleanup()
         return True
