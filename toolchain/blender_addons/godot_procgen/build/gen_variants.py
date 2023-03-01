@@ -18,7 +18,6 @@
 
 import os
 import pathlib
-import random
 import bpy
 from .. import core
 
@@ -37,41 +36,6 @@ class GenVariants(core.buildstep.BuildStep):
         self.__tmp_filepath = core.utils.create_tmp_blend()
         core.utils.bl_open_file(operand)
         core.utils.bl_save_as_file(self.__tmp_filepath)
-
-    def print_inputs(self, geo_node: bpy.types.NodesModifier):
-        modifier_name = geo_node.name
-        print("GDPG modifier: " + modifier_name)
-        for node_input in geo_node.node_group.inputs:
-            identifier = node_input.identifier
-            is_int = isinstance(node_input, bpy.types.NodeSocketInterfaceInt)
-            is_float = isinstance(node_input, bpy.types.NodeSocketInterfaceFloat)
-            if is_int or is_float:
-                input_name = node_input.name
-                value = bpy.context.object.modifiers[modifier_name].get(identifier)
-                print(input_name + " -- " + str(value))
-
-    def randomize_inputs(self, geo_node: bpy.types.NodesModifier):
-        modifier_name = geo_node.name
-        print("GDPG randomizing inputs of modifier: " + modifier_name)
-        for node_input in geo_node.node_group.inputs:
-            identifier = node_input.identifier
-            #input_name = node_input.name
-            if isinstance(node_input, bpy.types.NodeSocketInterfaceInt):
-                min_value = node_input.min_value
-                max_value = node_input.max_value
-                if min_value != max_value:
-                    value = random.randrange(min_value, max_value)
-                    #print(input_name + " -- " + str(value))
-                    bpy.context.object.modifiers[modifier_name][identifier] = value
-                continue
-            if isinstance(node_input, bpy.types.NodeSocketInterfaceFloat):
-                min_value = node_input.min_value
-                max_value = node_input.max_value
-                if min_value != max_value:
-                    value = random.uniform(min_value, max_value)
-                    #print(input_name + " -- " + str(value))
-                    bpy.context.object.modifiers[modifier_name][identifier] = value
-                continue
 
     def run(self) -> bool:
         out_dir = os.path.join(core.utils.get_variants_dir(), self.__rel_path, self.__base_name)
@@ -97,17 +61,18 @@ class GenVariants(core.buildstep.BuildStep):
                                 obj.select_set(True)
                                 for modifier in bpy.context.object.modifiers:
                                     if isinstance(modifier, bpy.types.NodesModifier):
-                                        self.randomize_inputs(modifier)
-                                        self.print_inputs(modifier)
+                                        core.reflection.randomize_all_inputs(modifier)
+                                        #core.reflection.print_inputs(modifier)
 
-                                bpy.ops.object.convert(target='MESH')
                                 obj.name = variant_name + "_genobj"
                                 obj.data.name = "genmesh"
-                                obj.select_set(False)
-                            break
+                                bpy.ops.object.convert(target='MESH')
 
-            path = os.path.join(out_dir, variant_name + ".blend")
-            core.utils.bl_save_as_file(path)
+                                path = os.path.join(out_dir, variant_name + ".blend")
+                                core.utils.bl_save_as_file(path)
+                                break
+                                #obj.select_set(False)
+                            break
 
         self._cleanup()
 

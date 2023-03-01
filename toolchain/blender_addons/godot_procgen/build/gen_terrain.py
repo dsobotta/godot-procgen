@@ -18,7 +18,6 @@
 
 import os
 import pathlib
-import random
 import bpy
 from .. import core
 
@@ -47,87 +46,27 @@ class GenTerrain(core.buildstep.BuildStep):
         core.utils.bl_open_file(operand)
         core.utils.bl_save_as_file(self.__tmp_filepath)
 
-    def print_inputs(self, geo_node: bpy.types.NodesModifier):
-        modifier_name = geo_node.name
-        print("GDPG modifier: " + modifier_name)
-        for node_input in geo_node.node_group.inputs:
-            identifier = node_input.identifier
-            is_int = isinstance(node_input, bpy.types.NodeSocketInterfaceInt)
-            is_float = isinstance(node_input, bpy.types.NodeSocketInterfaceFloat)
-            if is_int or is_float:
-                value = bpy.context.object.modifiers[modifier_name].get(identifier)
-                debug_data = [
-                    node_input.name,
-                    str(value)
-                ]
-                print(debug_data)
+    def get_chunk_range(self, chunks: int) -> range:
+        #center chunks around origin
+        #odd n=5    --> [-2, -1, 0, 1, 2]
+        #even n=4   -->     [-1, 0, 1, 2]
+        cm1_over2: int = (chunks-1)/2
+        cm1_mod2: int = (chunks-1)%2
 
-    def nsi_by_name(self, modifier: bpy.types.NodesModifier, input_name: str) -> bpy.types.NodeSocketInterface:
-        for node_input in modifier.node_group.inputs:
-            if input_name == node_input.name:
-                return node_input
-        return None
+        c_min: int = int(-cm1_over2)
+        c_max: int = int(cm1_over2 + cm1_mod2)
 
-    # def get_input_by_name(self, modifier: bpy.types.NodesModifier, input_name: str, value):
-    #     nsi = self.nsi_by_name(modifier, input_name)
-    #     if nsi is None:
-    #         print("Error, failed to find NodeSocketInterface with name: " + input_name)
-    #         return 0
-
-    #     return bpy.context.object.modifiers[modifier.name].get(nsi.identifier)
-
-    #returns the value that was set
-    def set_input_by_name(self, modifier: bpy.types.NodesModifier, input_name: str, value):
-        nsi = self.nsi_by_name(modifier, input_name)
-        if nsi is None:
-            print("Error, failed to find NodeSocketInterface with name: " + input_name)
-            return 0
-
-        bpy.context.object.modifiers[modifier.name][nsi.identifier] = value
-        return value
-
-    #returns the value that was set
-    def randomize_input_byname(self, modifier: bpy.types.NodesModifier, input_name: str):
-        nsi = self.nsi_by_name(modifier, input_name)
-        if nsi is None:
-            print("Error, failed to find NodeSocketInterface with name: " + input_name)
-            return 0
-        return self.randomize_input(modifier, nsi)
-
-    #returns the value that was set
-    def randomize_input(self, modifier: bpy.types.NodesModifier, nsi: bpy.types.NodeSocketInterface):
-        if isinstance(nsi, bpy.types.NodeSocketInterfaceInt):
-            value = random.randrange(nsi.min_value, nsi.max_value)
-            bpy.context.object.modifiers[modifier.name][nsi.identifier] = value
-            return value
-        if isinstance(nsi, bpy.types.NodeSocketInterfaceFloat):
-            value = random.uniform(nsi.min_value, nsi.max_value)
-            bpy.context.object.modifiers[modifier.name][nsi.identifier] = value
-            return value
-        return 0
+        return range(c_min, c_max + 1)
 
     def run(self) -> bool:
-        #center chunks around origin
-        #odd n=5 --> [-2, -1, 0, 1, 2]
-        #even n=4 --> [-1, 0, 1, 2]
-        xm1_over2: int = (self.__chunks_x-1)/2
-        xm1_mod2: int = (self.__chunks_x-1)%2
-        ym1_over2: int = (self.__chunks_y-1)/2
-        ym1_mod2: int = (self.__chunks_y-1)%2
-
-        min_grid_x: int = int(-xm1_over2)
-        max_grid_x: int = int(xm1_over2 + xm1_mod2)
-        min_grid_y: int = int(-ym1_over2)
-        max_grid_y: int = int(ym1_over2 + ym1_mod2)
-
         out_dir = os.path.join(core.utils.get_variants_dir(), self.__rel_path, self.__base_name)
         core.utils.create_dir(out_dir)
 
         seed_set = False
         shared_seed = 0
 
-        for x in range(min_grid_x, max_grid_x + 1):
-            for y in range(min_grid_y, max_grid_y + 1):
+        for x in self.get_chunk_range(self.__chunks_x):
+            for y in self.get_chunk_range(self.__chunks_y):
                 #re-open temp file (before mesh conversion) so we don't have to spam undo operations
                 core.utils.bl_open_file(self.__tmp_filepath)
                 chunk_name = self.__base_name + "_x" + str(x) + "_y" + str(y)
@@ -146,22 +85,22 @@ class GenTerrain(core.buildstep.BuildStep):
                                     for modifier in bpy.context.object.modifiers:
                                         if isinstance(modifier, bpy.types.NodesModifier):
                                             if not seed_set:
-                                                shared_seed = self.randomize_input_byname(modifier, "Seed")
+                                                shared_seed = core.reflection.randomize_input_byname(modifier, "Seed")
                                                 seed_set = True
                                             else:
-                                                self.set_input_by_name(modifier, "Seed", shared_seed)
+                                                core.reflection.set_input_by_name(modifier, "Seed", shared_seed)
 
-                                            self.set_input_by_name(modifier, "GridX", x)
-                                            self.set_input_by_name(modifier, "GridY", y)
-                                            self.print_inputs(modifier)
+                                            core.reflection.set_input_by_name(modifier, "GridX", x)
+                                            core.reflection.set_input_by_name(modifier, "GridY", y)
+                                            #core.reflection.print_inputs(modifier)
 
-                                    bpy.ops.object.convert(target='MESH')
                                     obj.name = chunk_name + "_genobj"
                                     obj.data.name = "genmesh"
+                                    bpy.ops.object.convert(target='MESH')
 
                                     path = os.path.join(out_dir, chunk_name + ".blend")
                                     core.utils.bl_save_as_file(path)
-                                    obj.select_set(False)
+                                    #obj.select_set(False)
                                 break
 
         self._cleanup()
