@@ -22,6 +22,9 @@ import bpy
 def get_toplevel_package() -> str:
     return "godot_procgen"
 
+def get_id_for_node_name() -> str:
+    return None
+
 def bl_result(task_result: bool) -> set:
     if not task_result:
         return {"CANCELLED"}

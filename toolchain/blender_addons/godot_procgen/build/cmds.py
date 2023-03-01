@@ -24,6 +24,7 @@ from .. import core
 from .gen_variants import GenVariants
 from .export_models import ExportModels
 from .copy_results import CopyResults
+from .gen_terrain import GenTerrain
 
 def clean() -> bool:
     core.utils.clean_build_dir()
@@ -33,14 +34,20 @@ def build(**kwargs) -> bool:
     args = {
         'variants': 5,
     }
-    #debug_args_update(args, kwargs)
     args.update(kwargs)
+    #debug_args_update(args, kwargs)
 
     print("GDPG: GENERATING MODEL VARIANTS...")
     models_src = os.path.join(core.utils.get_source_dir(), "models")
     if not core.buildstep.batch_build_in_dir(GenVariants, models_src, "*.blend", **args):
         return False
     print("GDPG: GENERATING MODEL VARIANTS...DONE")
+
+    print("GDPG: GENERATING TERRAIN VARIANTS...")
+    terrain_src = os.path.join(core.utils.get_source_dir(), "terrain")
+    if not core.buildstep.batch_build_in_dir(GenTerrain, terrain_src, "*.blend", **args):
+        return False
+    print("GDPG: GENERATING TERRAIN VARIANTS...DONE")
 
     print("GDPG: EXPORTING BINARY MODELS...")
     if not core.buildstep.batch_build_in_dir(ExportModels, core.utils.get_variants_dir(), "*.blend", **args):

@@ -1,14 +1,30 @@
-[gd_scene load_steps=14 format=3 uid="uid://bf5v70sddrk1d"]
+[gd_scene load_steps=30 format=3 uid="uid://bf5v70sddrk1d"]
 
-[ext_resource type="PackedScene" uid="uid://5nc7ehyrwt37" path="res://generated/terrain/forest_x0_y0.glb" id="1_8k65p"]
-[ext_resource type="PackedScene" uid="uid://cnynoqgls2mi7" path="res://generated/terrain/forest_x0_y1.glb" id="2_4lvkj"]
-[ext_resource type="PackedScene" uid="uid://dt8cdiro78hs6" path="res://generated/terrain/forest_x0_y-1.glb" id="3_a6nyq"]
-[ext_resource type="PackedScene" uid="uid://bnts810qtewrv" path="res://generated/terrain/forest_x1_y0.glb" id="4_mfecs"]
-[ext_resource type="PackedScene" uid="uid://dca57aocjlb74" path="res://generated/terrain/forest_x1_y1.glb" id="5_2dhkx"]
-[ext_resource type="PackedScene" uid="uid://cgep4sqhwh53q" path="res://generated/terrain/forest_x1_y-1.glb" id="6_e8vn1"]
-[ext_resource type="PackedScene" uid="uid://c26w3xxbmxgjm" path="res://generated/terrain/forest_x-1_y0.glb" id="7_wis3q"]
-[ext_resource type="PackedScene" uid="uid://xq4ux56e18rb" path="res://generated/terrain/forest_x-1_y1.glb" id="8_75ek8"]
-[ext_resource type="PackedScene" uid="uid://dc77o0oh2pwax" path="res://generated/terrain/forest_x-1_y-1.glb" id="9_17mex"]
+[ext_resource type="PackedScene" uid="uid://nfvw3ian5shg" path="res://generated/terrain/forest_ground/forest_ground_x0_y0.glb" id="1_sxold"]
+[ext_resource type="PackedScene" uid="uid://ci3o17fudv5uf" path="res://generated/terrain/forest_ground/forest_ground_x0_y1.glb" id="2_i1he2"]
+[ext_resource type="PackedScene" uid="uid://bhglr8822gd0p" path="res://generated/terrain/forest_ground/forest_ground_x0_y2.glb" id="3_nixa5"]
+[ext_resource type="PackedScene" uid="uid://b4ibpmf4qjyph" path="res://generated/terrain/forest_ground/forest_ground_x0_y-1.glb" id="4_vkvni"]
+[ext_resource type="PackedScene" uid="uid://dqxpodgvo7c24" path="res://generated/terrain/forest_ground/forest_ground_x0_y-2.glb" id="5_togxx"]
+[ext_resource type="PackedScene" uid="uid://cxb6uevow6thq" path="res://generated/terrain/forest_ground/forest_ground_x1_y0.glb" id="6_km83a"]
+[ext_resource type="PackedScene" uid="uid://dvdg6ctt8j4a3" path="res://generated/terrain/forest_ground/forest_ground_x1_y1.glb" id="7_kswt8"]
+[ext_resource type="PackedScene" uid="uid://0n7binfqo4tg" path="res://generated/terrain/forest_ground/forest_ground_x1_y2.glb" id="8_p62r2"]
+[ext_resource type="PackedScene" uid="uid://dshqx6a4qe2u7" path="res://generated/terrain/forest_ground/forest_ground_x1_y-1.glb" id="9_16wam"]
+[ext_resource type="PackedScene" uid="uid://dfpp3f5c6xny" path="res://generated/terrain/forest_ground/forest_ground_x1_y-2.glb" id="10_iphsx"]
+[ext_resource type="PackedScene" uid="uid://do34ud7kg6cpo" path="res://generated/terrain/forest_ground/forest_ground_x2_y0.glb" id="11_hobs2"]
+[ext_resource type="PackedScene" uid="uid://53cap7j6s1p4" path="res://generated/terrain/forest_ground/forest_ground_x2_y1.glb" id="12_dif3b"]
+[ext_resource type="PackedScene" uid="uid://dy7rd3ssvhlug" path="res://generated/terrain/forest_ground/forest_ground_x2_y2.glb" id="13_np2gc"]
+[ext_resource type="PackedScene" uid="uid://chsu7n4rwwdxo" path="res://generated/terrain/forest_ground/forest_ground_x2_y-1.glb" id="14_tl67l"]
+[ext_resource type="PackedScene" uid="uid://cwsjj5ou1usab" path="res://generated/terrain/forest_ground/forest_ground_x2_y-2.glb" id="15_o14s5"]
+[ext_resource type="PackedScene" uid="uid://dryg0gvr4yg1b" path="res://generated/terrain/forest_ground/forest_ground_x-1_y0.glb" id="16_41p5s"]
+[ext_resource type="PackedScene" uid="uid://cu6gfsrobw57v" path="res://generated/terrain/forest_ground/forest_ground_x-1_y1.glb" id="17_18xph"]
+[ext_resource type="PackedScene" uid="uid://dw0rq7mex2q7y" path="res://generated/terrain/forest_ground/forest_ground_x-1_y2.glb" id="18_63k35"]
+[ext_resource type="PackedScene" uid="uid://djbcp3a11x0eo" path="res://generated/terrain/forest_ground/forest_ground_x-1_y-1.glb" id="19_60iil"]
+[ext_resource type="PackedScene" uid="uid://c2i3rryy66mq4" path="res://generated/terrain/forest_ground/forest_ground_x-1_y-2.glb" id="20_hs17s"]
+[ext_resource type="PackedScene" uid="uid://buqvgiw3l6h7h" path="res://generated/terrain/forest_ground/forest_ground_x-2_y0.glb" id="21_to0nu"]
+[ext_resource type="PackedScene" uid="uid://bg7tt4okrpv7k" path="res://generated/terrain/forest_ground/forest_ground_x-2_y1.glb" id="22_fruec"]
+[ext_resource type="PackedScene" uid="uid://j7uowqykn2ov" path="res://generated/terrain/forest_ground/forest_ground_x-2_y2.glb" id="23_eeklc"]
+[ext_resource type="PackedScene" uid="uid://xg606q1snyyy" path="res://generated/terrain/forest_ground/forest_ground_x-2_y-1.glb" id="24_qoep2"]
+[ext_resource type="PackedScene" uid="uid://c4g7lxt6mnhce" path="res://generated/terrain/forest_ground/forest_ground_x-2_y-2.glb" id="25_f5okn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sjgwf"]
 
@@ -39,28 +55,76 @@ volumetric_fog_density = 0.004
 environment = SubResource("Environment_f21dg")
 camera_attributes = SubResource("CameraAttributesPractical_cxyay")
 
-[node name="forest_x0_y0" parent="." instance=ExtResource("1_8k65p")]
+[node name="forest_ground_x0_y0" parent="." instance=ExtResource("1_sxold")]
 
-[node name="forest_x0_y1" parent="." instance=ExtResource("2_4lvkj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -200)
-
-[node name="forest_x0_y-1" parent="." instance=ExtResource("3_a6nyq")]
+[node name="forest_ground_x0_y1" parent="." instance=ExtResource("2_i1he2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 200)
 
-[node name="forest_x1_y0" parent="." instance=ExtResource("4_mfecs")]
+[node name="forest_ground_x0_y2" parent="." instance=ExtResource("3_nixa5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 400)
+
+[node name="forest_ground_x0_y-1" parent="." instance=ExtResource("4_vkvni")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -200)
+
+[node name="forest_ground_x0_y-2" parent="." instance=ExtResource("5_togxx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -400)
+
+[node name="forest_ground_x1_y0" parent="." instance=ExtResource("6_km83a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 0)
 
-[node name="forest_x1_y1" parent="." instance=ExtResource("5_2dhkx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, -200)
-
-[node name="forest_x1_y-1" parent="." instance=ExtResource("6_e8vn1")]
+[node name="forest_ground_x1_y1" parent="." instance=ExtResource("7_kswt8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 200)
 
-[node name="forest_x-1_y0" parent="." instance=ExtResource("7_wis3q")]
+[node name="forest_ground_x1_y2" parent="." instance=ExtResource("8_p62r2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 400)
+
+[node name="forest_ground_x1_y-1" parent="." instance=ExtResource("9_16wam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, -200)
+
+[node name="forest_ground_x1_y-2" parent="." instance=ExtResource("10_iphsx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, -400)
+
+[node name="forest_ground_x2_y0" parent="." instance=ExtResource("11_hobs2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 0)
+
+[node name="forest_ground_x2_y1" parent="." instance=ExtResource("12_dif3b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 200)
+
+[node name="forest_ground_x2_y2" parent="." instance=ExtResource("13_np2gc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 400)
+
+[node name="forest_ground_x2_y-1" parent="." instance=ExtResource("14_tl67l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, -200)
+
+[node name="forest_ground_x2_y-2" parent="." instance=ExtResource("15_o14s5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, -400)
+
+[node name="forest_ground_x-1_y0" parent="." instance=ExtResource("16_41p5s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -200, 0, 0)
 
-[node name="forest_x-1_y1" parent="." instance=ExtResource("8_75ek8")]
+[node name="forest_ground_x-1_y1" parent="." instance=ExtResource("17_18xph")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -200, 0, 200)
+
+[node name="forest_ground_x-1_y2" parent="." instance=ExtResource("18_63k35")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -200, 0, 400)
+
+[node name="forest_ground_x-1_y-1" parent="." instance=ExtResource("19_60iil")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -200, 0, -200)
 
-[node name="forest_x-1_y-1" parent="." instance=ExtResource("9_17mex")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -200, 0, 200)
+[node name="forest_ground_x-1_y-2" parent="." instance=ExtResource("20_hs17s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -200, 0, -400)
+
+[node name="forest_ground_x-2_y0" parent="." instance=ExtResource("21_to0nu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -400, 0, 0)
+
+[node name="forest_ground_x-2_y1" parent="." instance=ExtResource("22_fruec")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -400, 0, 200)
+
+[node name="forest_ground_x-2_y2" parent="." instance=ExtResource("23_eeklc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -400, 0, 400)
+
+[node name="forest_ground_x-2_y-1" parent="." instance=ExtResource("24_qoep2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -400, 0, -200)
+
+[node name="forest_ground_x-2_y-2" parent="." instance=ExtResource("25_f5okn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -400, 0, -400)
