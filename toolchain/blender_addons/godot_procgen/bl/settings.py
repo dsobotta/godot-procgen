@@ -13,6 +13,39 @@
 import bpy
 from .. import core
 
+# class BuildSettings(bpy.types.PropertyGroup):
+
+#     gen_variants : bpy.types.BoolProperty(
+#         name="Generate Variants",
+#         description="",
+#         default = True
+#         )
+
+#     gen_terrain : bpy.types.BoolProperty(
+#         name="Generate Terrain",
+#         description="",
+#         default = True
+#         )
+
+#     export_models : bpy.types.BoolProperty(
+#         name="Export Models",
+#         description="",
+#         default = True
+#         )
+
+#     copy_results : bpy.types.BoolProperty(
+#         name="Copy Results",
+#         description="",
+#         default = True
+#         )
+
+#     seed : bpy.types.IntProperty(
+#         name = "Top-Level ProcGen Seed",
+#         default = 0,
+#         min = -50000,
+#         max = 50000
+#         )
+
 class GlobalSettings(bpy.types.AddonPreferences):
     bl_idname = core.utils.get_toplevel_package()
 
