@@ -69,7 +69,7 @@ class GenTerrain(core.buildstep.BuildStep):
             for y in self.get_chunk_range(self.__chunks_y):
                 #re-open temp file (before mesh conversion) so we don't have to spam undo operations
                 core.utils.bl_open_file(self.__tmp_filepath)
-                chunk_name = self.__base_name + "_x" + str(x) + "_y" + str(y)
+                chunk_name = self.__base_name + "_x" + str(x) + "_y" + str(y) 
 
                 #https://blenderartists.org/t/bad-context-after-open-new-file-with-python/1398392
                 for w in bpy.context.window_manager.windows:

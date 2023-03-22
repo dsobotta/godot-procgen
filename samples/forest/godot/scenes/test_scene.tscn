@@ -7259,19 +7259,34 @@ transform = Transform3D(-0.743542, 0, 0.66869, 0, 1, 0, -0.66869, 0, -0.743542, 
 [node name="trees" type="Node3D" parent="."]
 
 [node name="tree_pine1" parent="trees" instance=ExtResource("6_f6473")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.4001, 0, 15.1545)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.4946, 0, 15.158)
 
 [node name="tree_pine2" parent="trees" instance=ExtResource("7_o2jhx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.3727, 0, 6.13554)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.4133, 0, 6.13554)
 
 [node name="tree_pine3" parent="trees" instance=ExtResource("8_d3lbp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.2852, 0, 8.18392)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5507, 0, 10.8282)
 
 [node name="tree_pine4" parent="trees" instance=ExtResource("9_p3cfl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.2926, 0, 2.77432)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.6954, 0, 5.79763)
 
 [node name="tree_pine5" parent="trees" instance=ExtResource("10_m67ly")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.2846, 0, 13.2616)
+transform = Transform3D(-0.419072, 0, 0.907953, 0, 1, 0, -0.907953, 0, -0.419072, -22.1635, 0, 1.09307)
+
+[node name="tree_pine6" parent="trees" instance=ExtResource("6_f6473")]
+transform = Transform3D(0.951234, 0, 0.308469, 0, 1, 0, -0.308469, 0, 0.951234, -23.8682, 0, 18.4793)
+
+[node name="tree_pine7" parent="trees" instance=ExtResource("7_o2jhx")]
+transform = Transform3D(0.951234, 0, 0.308469, 0, 1, 0, -0.308469, 0, 0.951234, -29.2357, 0, 13.0704)
+
+[node name="tree_pine8" parent="trees" instance=ExtResource("8_d3lbp")]
+transform = Transform3D(0.951234, 0, 0.308469, 0, 1, 0, -0.308469, 0, 0.951234, -22.036, 0, 10.1553)
+
+[node name="tree_pine9" parent="trees" instance=ExtResource("9_p3cfl")]
+transform = Transform3D(0.951234, 0, 0.308469, 0, 1, 0, -0.308469, 0, 0.951234, -28.8901, 0, 1.0022)
+
+[node name="tree_pine10" parent="trees" instance=ExtResource("10_m67ly")]
+transform = Transform3D(0.951234, 0, 0.308469, 0, 1, 0, -0.308469, 0, 0.951234, -15.3969, 0, 16.7016)
 
 [node name="rocks" type="Node3D" parent="."]
 
