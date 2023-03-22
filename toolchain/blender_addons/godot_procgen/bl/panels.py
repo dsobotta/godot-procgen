@@ -34,8 +34,13 @@ class GDPG_PT_Build(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
+ 
         layout.operator("gdpg.clean")
-        layout.operator("gdpg.build")
+        op = layout.operator("gdpg.build")
+        op.gen_variants    = True
+        op.gen_terrain     = True
+        op.export_models   = True
+        op.copy_results    = True
         layout.operator("gdpg.rebuild")
 
 class GDPG_PT_MainPanel(bpy.types.Panel):
