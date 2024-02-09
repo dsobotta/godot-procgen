@@ -34,7 +34,7 @@ class GDPG_PT_Build(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
- 
+
         layout.operator("gdpg.clean")
         op = layout.operator("gdpg.build")
         op.gen_variants    = True
